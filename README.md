@@ -15,6 +15,7 @@ The extension code is ~100 lines with zero dependencies. It never requests permi
 | `hide-ads.css` | Cosmetic filtering (hides leftover empty ad containers) |
 | `popup.html` / `popup.js` | Toolbar popup with per-ruleset on/off toggles |
 | `tools/convert.py` | Converter: Adblock Plus filter syntax → MV3 rule JSON |
+| `tools/update-lists.sh` | One-command refresh of the EasyList/EasyPrivacy rule files |
 
 ## Installation
 
@@ -43,16 +44,24 @@ After editing any file, go back to `chrome://extensions` and click the **reload 
 
 ### Updating the filter lists
 
-The bundled EasyList/EasyPrivacy snapshots are current as of the commit date. To refresh them:
+The bundled EasyList/EasyPrivacy snapshots are current as of the commit date. Upstream, both lists change daily (new ad domains, false-positive fixes), so refresh them every week or two:
 
 ```bash
-curl -sSL -o /tmp/easylist.txt    https://easylist.to/easylist/easylist.txt
-curl -sSL -o /tmp/easyprivacy.txt https://easylist.to/easylist/easyprivacy.txt
-python3 tools/convert.py /tmp/easylist.txt    rules_easylist.json
-python3 tools/convert.py /tmp/easyprivacy.txt rules_easyprivacy.json
+tools/update-lists.sh
 ```
 
-Then reload the extension. The converter handles the standard network-filter syntax (`||domain^`, `$third-party`, `$script`, `$domain=`, `@@` exceptions, ...) and skips what declarativeNetRequest cannot express (cosmetic rules, regex filters, `$csp`, `$redirect`, `$removeparam`, `$popup`); it prints a summary of what was converted and skipped.
+The script downloads the latest lists, converts them, verifies the total stays under Chrome's guaranteed 30,000-rule limit, and only then replaces the rule files — a failed download can never leave you with corrupt rules. Afterwards, reload the extension at `chrome://extensions` (Chrome only reads static rule files at load time, so this last click cannot be automated).
+
+To run it automatically, add a cron entry (`crontab -e`):
+
+```cron
+# Refresh filter lists every Monday at 09:00
+0 9 * * 1 /home/roger/my-adblocker/tools/update-lists.sh >> /tmp/adblock-update.log 2>&1
+```
+
+You'll still need to click reload in Chrome once after each refresh.
+
+Under the hood, `tools/convert.py` handles the standard network-filter syntax (`||domain^`, `$third-party`, `$script`, `$domain=`, `@@` exceptions, ...) and skips what declarativeNetRequest cannot express (cosmetic rules, regex filters, `$csp`, `$redirect`, `$removeparam`, `$popup`); it prints a summary of what was converted and skipped.
 
 ### Adding your own blocking rules
 
