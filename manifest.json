@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "My Ad Blocker",
+  "version": "1.1.0",
+  "description": "A minimal, self-built ad blocker: declarativeNetRequest network blocking (EasyList + EasyPrivacy) plus cosmetic element hiding.",
+  "permissions": ["declarativeNetRequest"],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "custom",
+        "enabled": true,
+        "path": "rules_custom.json"
+      },
+      {
+        "id": "easylist",
+        "enabled": true,
+        "path": "rules_easylist.json"
+      },
+      {
+        "id": "easyprivacy",
+        "enabled": true,
+        "path": "rules_easyprivacy.json"
+      }
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "css": ["hide-ads.css"],
+      "run_at": "document_start"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

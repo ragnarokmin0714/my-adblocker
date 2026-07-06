@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "requestDomains": [
+        "doubleclick.net",
+        "googlesyndication.com",
+        "googleadservices.com",
+        "adservice.google.com",
+        "amazon-adsystem.com",
+        "adnxs.com",
+        "criteo.com",
+        "criteo.net",
+        "taboola.com",
+        "outbrain.com",
+        "scorecardresearch.com",
+        "moatads.com",
+        "pubmatic.com",
+        "rubiconproject.com",
+        "openx.net",
+        "adsafeprotected.com",
+        "casalemedia.com",
+        "smartadserver.com",
+        "adform.net",
+        "yieldmo.com",
+        "sharethrough.com",
+        "media.net",
+        "bidswitch.net",
+        "33across.com",
+        "adcolony.com",
+        "popads.net",
+        "propellerads.com",
+        "onclickads.net",
+        "exoclick.com",
+        "juicyads.com",
+        "trafficjunky.net",
+        "zedo.com",
+        "adroll.com",
+        "quantserve.com",
+        "hotjar.com",
+        "mgid.com",
+        "revcontent.com"
+      ],
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "sub_frame",
+        "media",
+        "ping",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "/pagead/js/adsbygoogle.js",
+      "resourceTypes": ["script"]
+    }
+  }
+]

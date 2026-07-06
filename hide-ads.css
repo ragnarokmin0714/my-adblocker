@@ -1,0 +1,20 @@
+/* Cosmetic filtering: hide the empty ad containers left behind
+   after the network-level rules block the ad requests. */
+ins.adsbygoogle,
+iframe[src*="doubleclick.net"],
+iframe[src*="googlesyndication"],
+iframe[id^="google_ads_iframe"],
+div[id^="div-gpt-ad"],
+div[id^="taboola-"],
+div[class^="OUTBRAIN"],
+.ad-banner,
+.ad-container,
+.ad-wrapper,
+.adsbox,
+.advertisement,
+#ad-top,
+#ad-bottom,
+[id="ad_unit"],
+[class="sponsored-content"] {
+  display: none !important;
+}
