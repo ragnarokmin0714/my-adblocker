@@ -16,6 +16,7 @@ The extension code is ~100 lines with zero dependencies. It never requests permi
 | `popup.html` / `popup.js` | Toolbar popup with per-ruleset on/off toggles |
 | `tools/convert.py` | Converter: Adblock Plus filter syntax → MV3 rule JSON |
 | `tools/update-lists.sh` | One-command refresh of the EasyList/EasyPrivacy rule files |
+| `CHANGELOG.md` | Version history and release notes |
 
 ## Installation
 
@@ -55,8 +56,8 @@ The script downloads the latest lists, converts them, verifies the total stays u
 To run it automatically, add a cron entry (`crontab -e`):
 
 ```cron
-# Refresh filter lists every Monday at 09:00
-0 9 * * 1 /home/roger/my-adblocker/tools/update-lists.sh >> /tmp/adblock-update.log 2>&1
+# Refresh filter lists every Monday at 09:00 (use the absolute path to this repo)
+0 9 * * 1 /path/to/my-adblocker/tools/update-lists.sh >> /tmp/adblock-update.log 2>&1
 ```
 
 You'll still need to click reload in Chrome once after each refresh.

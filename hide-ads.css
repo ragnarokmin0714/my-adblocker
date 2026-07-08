@@ -1,12 +1,25 @@
-/* Cosmetic filtering: hide the empty ad containers left behind
-   after the network-level rules block the ad requests. */
+/*
+ * Cosmetic filtering: hide the empty ad containers left behind after the
+ * network-level rules block the ad requests. Grouped by source so it is easy
+ * to see what each selector targets and to add new ones in the right place.
+ */
+
+/* Google Ads / Google Publisher Tag */
 ins.adsbygoogle,
 iframe[src*="doubleclick.net"],
 iframe[src*="googlesyndication"],
 iframe[id^="google_ads_iframe"],
-div[id^="div-gpt-ad"],
+div[id^="div-gpt-ad"] {
+  display: none !important;
+}
+
+/* Content-recommendation ad networks */
 div[id^="taboola-"],
-div[class^="OUTBRAIN"],
+div[class^="OUTBRAIN"] {
+  display: none !important;
+}
+
+/* Generic ad containers (common class / id conventions) */
 .ad-banner,
 .ad-container,
 .ad-wrapper,
