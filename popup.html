@@ -4,13 +4,30 @@
   <meta charset="utf-8">
   <style>
     body { font-family: system-ui, sans-serif; width: 240px; padding: 12px; }
-    h1 { font-size: 14px; margin: 0 0 10px; }
+    header { display: flex; align-items: center; gap: 9px; margin: 0 0 12px; }
+    header svg { width: 26px; height: 26px; flex: none; }
+    h1 { font-size: 16px; margin: 0; letter-spacing: -0.02em; }
+    h1 .glass { font-weight: 300; }
+    h1 .block { font-weight: 700; }
     label { display: flex; align-items: center; gap: 8px; font-size: 13px; margin-bottom: 6px; }
     #status { color: #666; font-size: 12px; margin-top: 8px; }
   </style>
 </head>
 <body>
-  <h1>My Ad Blocker</h1>
+  <header>
+    <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="gb" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#3A7BFF"/>
+          <stop offset="1" stop-color="#16C6D4"/>
+        </linearGradient>
+      </defs>
+      <rect x="16" y="16" width="96" height="96" rx="26" fill="url(#gb)"/>
+      <rect x="27" y="27" width="74" height="74" rx="18" fill="none" stroke="#fff" stroke-width="3" opacity="0.22"/>
+      <path d="M32 96 L96 32" stroke="#fff" stroke-width="9" stroke-linecap="round" opacity="0.92"/>
+    </svg>
+    <h1><span class="glass">Glass</span><span class="block">Block</span></h1>
+  </header>
   <label><input type="checkbox" id="custom"> Custom rules</label>
   <label><input type="checkbox" id="easylist"> EasyList (ads)</label>
   <label><input type="checkbox" id="easyprivacy"> EasyPrivacy (trackers)</label>

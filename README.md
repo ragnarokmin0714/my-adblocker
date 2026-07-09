@@ -1,6 +1,6 @@
-# My Ad Blocker
+# GlassBlock
 
-A minimal, self-built Chrome ad blocker based on the Manifest V3 `declarativeNetRequest` API, with full **EasyList** and **EasyPrivacy** coverage converted to native Chrome rule format.
+A minimal, self-built Chrome ad blocker based on the Manifest V3 `declarativeNetRequest` API, with full **EasyList** and **EasyPrivacy** coverage converted to native Chrome rule format. The name says the pitch: like a pane of glass, everything about it is transparent — you can see (and audit) exactly what it does.
 
 The extension code is ~100 lines with zero dependencies. It never requests permission to read your page content — filtering is declarative and executed by the browser engine itself. You can audit every line, and nobody can push a malicious update to you.
 
@@ -17,6 +17,7 @@ The extension code is ~100 lines with zero dependencies. It never requests permi
 | `tools/convert.py` | Converter: Adblock Plus filter syntax → MV3 rule JSON |
 | `tools/update-lists.sh` | One-command refresh of the EasyList/EasyPrivacy rule files |
 | `CHANGELOG.md` | Version history and release notes |
+| `icons/` | Master `icon.svg` plus exported `icon16/48/128.png` used by the manifest |
 
 ## Installation
 

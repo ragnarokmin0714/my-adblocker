@@ -1,0 +1,235 @@
+<style>
+  :root {
+    --blue: #3A7BFF;
+    --cyan: #16C6D4;
+    --ink: #10182A;
+    --muted: #5A6B84;
+    --ground: #EEF3FA;
+    --card: #FFFFFF;
+    --line: #D9E2EF;
+    --chip-dark: #0E1622;
+    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #EAF0FA; --muted: #93A2BC; --ground: #0A0F1A;
+      --card: #121C2C; --line: #24314A;
+    }
+  }
+  :root[data-theme="light"] {
+    --ink: #10182A; --muted: #5A6B84; --ground: #EEF3FA;
+    --card: #FFFFFF; --line: #D9E2EF;
+  }
+  :root[data-theme="dark"] {
+    --ink: #EAF0FA; --muted: #93A2BC; --ground: #0A0F1A;
+    --card: #121C2C; --line: #24314A;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  .page {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    min-height: 100vh;
+    padding: clamp(24px, 6vw, 72px) 20px 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+  .wrap { width: 100%; max-width: 760px; display: flex; flex-direction: column; gap: 40px; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 20px;
+  }
+
+  /* Hero */
+  .hero {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: clamp(28px, 5vw, 52px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 22px;
+  }
+  .hero .stage {
+    width: 168px; height: 168px;
+    display: grid; place-items: center;
+    border-radius: 28px;
+    background:
+      radial-gradient(120% 120% at 30% 20%, rgba(58,123,255,0.10), transparent 60%),
+      radial-gradient(120% 120% at 80% 90%, rgba(22,198,212,0.10), transparent 60%);
+  }
+  .wordmark {
+    font-size: clamp(30px, 7vw, 46px);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    text-wrap: balance;
+  }
+  .wordmark .glass { font-weight: 300; }
+  .wordmark .block { font-weight: 750; }
+  .tagline {
+    margin: 0;
+    color: var(--muted);
+    font-size: clamp(14px, 2.4vw, 16px);
+    max-width: 42ch;
+    line-height: 1.5;
+  }
+
+  .section-title { font-size: 13px; font-weight: 650; margin: 0 0 16px; letter-spacing: -0.01em; }
+
+  /* Sizes */
+  .sizes { display: flex; flex-wrap: wrap; gap: 14px; }
+  .chip {
+    flex: 1 1 150px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 22px 16px 14px;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+    background: var(--card);
+  }
+  .chip.on-dark { background: var(--chip-dark); border-color: #1D2A40; }
+  .chip .row { display: flex; align-items: flex-end; gap: 16px; min-height: 48px; }
+  .chip .meta {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+  .chip.on-dark .meta { color: #8698B5; }
+
+  /* Idea grid */
+  .ideas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .idea {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 16px; padding: 20px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .idea svg { width: 34px; height: 34px; }
+  .idea h4 { margin: 4px 0 0; font-size: 14px; letter-spacing: -0.01em; }
+  .idea p { margin: 0; font-size: 13px; line-height: 1.5; color: var(--muted); }
+
+  /* Palette */
+  .palette { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .sw { display: flex; flex-direction: column; gap: 8px; }
+  .sw .dot { height: 56px; border-radius: 12px; border: 1px solid var(--line); }
+  .sw .name { font-size: 12px; font-weight: 600; }
+  .sw .hex { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.02em; }
+
+  .files {
+    font-family: var(--mono); font-size: 12.5px; line-height: 1.7;
+    color: var(--muted);
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 18px 20px;
+    overflow-x: auto;
+  }
+  .files b { color: var(--ink); font-weight: 600; }
+
+  @media (max-width: 560px) {
+    .ideas { grid-template-columns: 1fr; }
+    .palette { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+
+<!-- reusable mark -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gb-block" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3A7BFF"/>
+      <stop offset="1" stop-color="#16C6D4"/>
+    </linearGradient>
+    <symbol id="mark" viewBox="0 0 128 128">
+      <rect x="16" y="16" width="96" height="96" rx="26" fill="url(#gb-block)"/>
+      <rect x="27" y="27" width="74" height="74" rx="18" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.22"/>
+      <path d="M32 96 L96 32" stroke="#ffffff" stroke-width="9" stroke-linecap="round" opacity="0.92"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="page">
+  <div class="wrap">
+
+    <div>
+      <p class="eyebrow">Visual identity · proposal</p>
+      <div class="hero">
+        <div class="stage">
+          <svg width="132" height="132"><use href="#mark"/></svg>
+        </div>
+        <div class="wordmark"><span class="glass">Glass</span><span class="block">Block</span></div>
+        <p class="tagline">A transparent ad blocker you can audit line by line. Nothing hidden, nothing phoning home.</p>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="section-title">Legibility at icon sizes</h3>
+      <div class="sizes">
+        <div class="chip">
+          <div class="row">
+            <svg width="48" height="48"><use href="#mark"/></svg>
+            <svg width="32" height="32"><use href="#mark"/></svg>
+            <svg width="16" height="16"><use href="#mark"/></svg>
+          </div>
+          <span class="meta">48 · 32 · 16 px — on light</span>
+        </div>
+        <div class="chip on-dark">
+          <div class="row">
+            <svg width="48" height="48"><use href="#mark"/></svg>
+            <svg width="32" height="32"><use href="#mark"/></svg>
+            <svg width="16" height="16"><use href="#mark"/></svg>
+          </div>
+          <span class="meta">48 · 32 · 16 px — on dark</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="section-title">The idea in three marks</h3>
+      <div class="ideas">
+        <div class="idea">
+          <svg viewBox="0 0 128 128"><use href="#mark"/></svg>
+          <h4>Glass = transparent</h4>
+          <p>The beveled edge reads as real glass — the code is open and every rule is inspectable.</p>
+        </div>
+        <div class="idea">
+          <svg viewBox="0 0 128 128"><use href="#mark"/></svg>
+          <h4>The slash = block</h4>
+          <p>One confident diagonal doubles as a light glint and the universal "blocked" stroke.</p>
+        </div>
+        <div class="idea">
+          <svg viewBox="0 0 128 128"><use href="#mark"/></svg>
+          <h4>Blue → cyan = light</h4>
+          <p>A cool gradient, like a glass block catching daylight. Calm, technical, trustworthy.</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="section-title">Palette</h3>
+      <div class="palette">
+        <div class="sw"><div class="dot" style="background:#3A7BFF"></div><span class="name">Blue</span><span class="hex">#3A7BFF</span></div>
+        <div class="sw"><div class="dot" style="background:#16C6D4"></div><span class="name">Cyan</span><span class="hex">#16C6D4</span></div>
+        <div class="sw"><div class="dot" style="background:#10182A"></div><span class="name">Ink</span><span class="hex">#10182A</span></div>
+        <div class="sw"><div class="dot" style="background:#5A6B84"></div><span class="name">Muted</span><span class="hex">#5A6B84</span></div>
+        <div class="sw"><div class="dot" style="background:#EEF3FA"></div><span class="name">Ground</span><span class="hex">#EEF3FA</span></div>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="section-title">Generated files</h3>
+      <div class="files">
+        <b>icons/icon.svg</b> — master vector (edit here)<br>
+        <b>icons/icon16.png</b> · <b>icon48.png</b> · <b>icon128.png</b> — Chrome toolbar / management / store<br>
+        Wire into <b>manifest.json</b> via the <b>"icons"</b> and <b>action.default_icon</b> keys.
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,9 +1,14 @@
 {
   "manifest_version": 3,
-  "name": "My Ad Blocker",
-  "version": "1.1.0",
+  "name": "GlassBlock",
+  "version": "1.2.0",
   "description": "A minimal, self-built ad blocker: declarativeNetRequest network blocking (EasyList + EasyPrivacy) plus cosmetic element hiding.",
   "permissions": ["declarativeNetRequest"],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
   "declarative_net_request": {
     "rule_resources": [
       {
@@ -31,6 +36,11 @@
     }
   ],
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
   }
 }

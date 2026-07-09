@@ -4,6 +4,16 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [1.2.0]
+
+### Added
+- Icon set: master `icons/icon.svg` and exported `icon16/48/128.png`, wired into
+  the manifest (`icons` and `action.default_icon`).
+- Logo mark shown in the toolbar popup header.
+
+### Changed
+- Renamed the extension to **GlassBlock**.
+
 ## [1.1.0]
 
 ### Added
